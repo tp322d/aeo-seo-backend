@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leads",
+  "info": {
+    "singularName": "lead",
+    "pluralName": "leads",
+    "displayName": "Leads",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone_number": {
+      "type": "string",
+      "required": true
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "service_of_interest": {
+      "type": "enumeration",
+      "enum": [
+        "AI SEO Audit",
+        "Content Strategy",
+        "Technical AEO"
+      ],
+      "required": true
+    },
+    "submission_date": {
+      "required": true,
+      "type": "datetime"
+    }
+  }
+}

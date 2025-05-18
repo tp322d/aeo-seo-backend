@@ -1,0 +1,43 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "Leads",
+    "description": "Write about yourself and the content you create"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "service_of_interest": {
+      "type": "enumeration",
+      "enum": [
+        "AI SEO Audit",
+        "Content Strategy",
+        "Technical AEO"
+      ],
+      "required": true
+    },
+    "submission_date": {
+      "type": "datetime"
+    },
+    "phone_number": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
