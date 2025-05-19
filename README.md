@@ -1,21 +1,37 @@
 # DeepRank Strapi Backend
 
 ## Overview
-Strapi-based backend for the DeepRank AI SEO consulting platform. This application provides the API and content management system for the frontend application.
+Strapi-based backend for the DeepRank AI SEO consulting platform. This application provides the API and content management system for the frontend application, handling lead generation, website analysis, and content management.
+
+## Features
+- Lead Management System
+- Website Analysis API
+- Content Management System
+- SEO Score Calculation
+- AEO (AI Engine Optimization) Analysis
+- RESTful API Endpoints
+- Admin Dashboard
 
 ## System Requirements
 - Node.js v22.15.1
 - npm (comes with Node.js)
 - MySQL/MariaDB database
+- PM2 (for production deployment)
 
 ## Project Structure
 ```
 aeo-seo-backend/
 ├── config/         # Strapi configuration files
+│   ├── api.ts      # API configuration
+│   ├── database.ts # Database configuration
+│   └── server.ts   # Server configuration
 ├── database/       # Database configuration and migrations
 ├── public/         # Public assets
 ├── src/
 │   ├── api/       # API endpoints and models
+│   │   ├── lead/  # Lead management
+│   │   ├── website-check/ # Website analysis
+│   │   └── about/ # About page content
 │   ├── admin/     # Admin panel customization
 │   └── plugins/   # Custom plugins
 └── dist/          # Production build output
@@ -27,7 +43,7 @@ aeo-seo-backend/
    npm install
    ```
 
-2. Configure database:
+2. Configure environment variables:
    Create `.env` file with:
    ```env
    HOST=0.0.0.0
@@ -106,9 +122,26 @@ The application runs as a systemd service in production.
    ```
 
 ## API Documentation
-- Admin panel available at: https://api.patste.me/admin
-- API endpoints available at: https://api.patste.me/api
+- Admin panel available at: https://api.deeprank.ai/admin
+- API endpoints available at: https://api.deeprank.ai/api
 - Documentation available in the Strapi admin panel
+
+### Available Endpoints
+- `/api/leads` - Lead management
+  - POST: Create new lead
+  - GET: List all leads
+  - GET /:id: Get specific lead
+  - PUT /:id: Update lead
+  - DELETE /:id: Delete lead
+
+- `/api/website-check` - Website analysis
+  - POST: Analyze website
+  - GET: List all analyses
+  - GET /:id: Get specific analysis
+
+- `/api/about` - About page content
+  - GET: Get about page content
+  - PUT: Update about page content
 
 ## Database Management
 1. Backup database:
@@ -119,6 +152,20 @@ The application runs as a systemd service in production.
 2. Restore database:
    ```bash
    mysql -u your_username -p your_database_name < backup.sql
+   ```
+
+## Security Configuration
+1. CORS settings in `config/server.ts`:
+   ```typescript
+   cors: {
+     enabled: true,
+     origin: ['https://deeprank.ai', 'https://www.deeprank.ai', 'http://localhost:3000'],
+   }
+   ```
+
+2. Content Security Policy in Nginx:
+   ```nginx
+   add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.youtube.com https://www.youtube-nocookie.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://api.deeprank.ai; font-src 'self' data:; object-src 'none'; media-src 'self'; frame-ancestors 'self';" always;
    ```
 
 ## Troubleshooting
@@ -133,6 +180,12 @@ The application runs as a systemd service in production.
    - Remove `node_modules` and reinstall dependencies
    - Check for TypeScript errors
 
+3. If API calls fail:
+   - Check CORS configuration
+   - Verify API permissions
+   - Check database connection
+   - Review error logs
+
 ## Maintenance
 1. Regular updates:
    ```bash
@@ -142,21 +195,23 @@ The application runs as a systemd service in production.
 2. Database maintenance:
    - Regular backups
    - Index optimization
-   - Query performance monitoring
+   - Query optimization
 
-3. Rebuilding after changes:
-   ```bash
-   NODE_ENV=production npm run build
-   sudo systemctl restart deeprank-strapi-back.service
-   ```
+3. Monitoring:
+   - Check application logs
+   - Monitor database performance
+   - Review error logs
+   - Monitor API response times
 
 ## Security Considerations
 - The application runs under the `deeprank` user
-- API is served through Nginx reverse proxy with SSL
-- Environment variables are properly secured
-- Regular security updates
-- API rate limiting enabled
-- CORS configured for frontend domain
+- HTTPS is enforced in production
+- CORS is properly configured
+- Content Security Policy is implemented
+- API endpoints are protected
+- Database credentials are secured
+- Rate limiting is implemented
+- Input validation is enforced
 
 # 🚀 Getting started with Strapi
 
