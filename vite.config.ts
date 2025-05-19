@@ -11,6 +11,6 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    allowedHosts: true,
+    allowedHosts: ['api.deeprank.ai', 'localhost'],
   },
 }); 
