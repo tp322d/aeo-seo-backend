@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "website_checks",
+  "info": {
+    "singularName": "website-check",
+    "pluralName": "website-checks",
+    "displayName": "Website Check"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "seoScore": {
+      "type": "decimal",
+      "required": true,
+      "max": 100,
+      "min": 0
+    },
+    "aeoScore": {
+      "type": "decimal",
+      "max": 100,
+      "min": 0,
+      "required": true
+    },
+    "analysisResults": {
+      "type": "json",
+      "required": true
+    },
+    "lastChecked": {
+      "type": "date",
+      "required": true,
+      "configurable": false
+    },
+    "userEmail": {
+      "type": "email"
+    }
+  }
+}
